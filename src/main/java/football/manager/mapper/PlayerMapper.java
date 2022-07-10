@@ -16,14 +16,14 @@ public class PlayerMapper {
     }
 
     public PlayerResponseDto toDto(Player player) {
-       PlayerResponseDto responseDto = new PlayerResponseDto();
-       responseDto.setId(player.getId());
-       responseDto.setFirstName(player.getFirstName());
-       responseDto.setLastName(player.getLastName());
-       responseDto.setAge(player.getAge());
-       responseDto.setExperience(player.getExperience());
-       responseDto.setTeam(player.getTeam());
-       return responseDto;
+        PlayerResponseDto responseDto = new PlayerResponseDto();
+        responseDto.setId(player.getId());
+        responseDto.setFirstName(player.getFirstName());
+        responseDto.setLastName(player.getLastName());
+        responseDto.setAge(player.getAge());
+        responseDto.setExperience(player.getExperience());
+        responseDto.setTeam(player.getTeam());
+        return responseDto;
     }
 
     public Player toModel(PlayerRequestDto requestDto) {

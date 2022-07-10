@@ -31,12 +31,12 @@ public class PlayerController {
     @PostMapping
     public PlayerResponseDto save(@RequestBody @Valid PlayerRequestDto requestDto) {
         Player player = playerMapper.toModel(requestDto);
-        return playerMapper.toDto( playerService.save(player));
+        return playerMapper.toDto(playerService.save(player));
     }
 
     @GetMapping("/{id}")
     public PlayerResponseDto get(@PathVariable Long id) {
-        return playerMapper.toDto( playerService.get(id));
+        return playerMapper.toDto(playerService.get(id));
     }
 
     @GetMapping
@@ -45,8 +45,10 @@ public class PlayerController {
                 .map(playerMapper::toDto)
                 .collect(Collectors.toList());
     }
+
     @PutMapping("/{id}")
-    public PlayerResponseDto update(@PathVariable Long id, @RequestBody @Valid PlayerRequestDto requestDto) {
+    public PlayerResponseDto update(@PathVariable Long id,
+                                    @RequestBody @Valid PlayerRequestDto requestDto) {
         Player player = playerMapper.toModel(requestDto);
         return playerMapper.toDto(playerService.update(player));
     }
@@ -55,7 +57,4 @@ public class PlayerController {
     public void delete(@PathVariable Long id) {
         playerService.delete(id);
     }
-
-
-
 }
