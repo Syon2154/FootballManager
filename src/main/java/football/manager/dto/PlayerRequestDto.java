@@ -17,6 +17,7 @@ public class PlayerRequestDto {
     @Positive
     private int experience;
     @NotNull
+    @Positive
     private Long teamId;
 
     public String getFirstName() {
