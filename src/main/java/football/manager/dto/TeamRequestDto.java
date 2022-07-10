@@ -1,29 +1,17 @@
-package football.manager.model;
+package football.manager.dto;
 
 import java.math.BigDecimal;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Table(name = "teams")
-public class Team {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class TeamRequestDto {
+    @NotBlank
+    @NotEmpty
     private String name;
+    @NotBlank
+    @NotEmpty
     private String country;
     private BigDecimal budget;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
