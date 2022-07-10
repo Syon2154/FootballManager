@@ -36,6 +36,6 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public void delete(Long id) {
-        playerRepository.delete(get(id));
+        playerRepository.deleteById(id);
     }
 }
