@@ -63,7 +63,6 @@ public class TransferServiceImpl implements TransferService {
 
     private BigDecimal calculatePrice(Transfer transfer) {
         Player player = transfer.getPlayer();
-        Team buyerTeam = transfer.getBuyerTeam();
         return BigDecimal.valueOf(player.getExperience())
                 .multiply(PRICE_MULTIPLIER)
                 .divide(BigDecimal.valueOf(
