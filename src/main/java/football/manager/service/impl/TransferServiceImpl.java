@@ -32,15 +32,16 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public Transfer createTransfer(Transfer transfer) {
-        Player player = transfer.getPlayer();
         Team buyerTeam = transfer.getBuyerTeam();
-        Team sellerTeam = transfer.getSellerTeam();
         BigDecimal price = calculatePrice(transfer);
+
         price = price.add(calculateCommission(price,
                 buyerTeam.getCommission()));
         if (price.compareTo(buyerTeam.getBudget()) > 0) {
             throw new TransferProcessingException("Not enough money");
         }
+        Team sellerTeam = transfer.getSellerTeam();
+        Player player = transfer.getPlayer();
         buyerTeam.setBudget(buyerTeam.getBudget().subtract(price));
         sellerTeam.setBudget(sellerTeam.getBudget().add(price));
         player.setTeam(buyerTeam);
@@ -72,7 +73,7 @@ public class TransferServiceImpl implements TransferService {
     }
 
     private BigDecimal calculateCommission(BigDecimal price, double percent) {
-         return price.divide(
+        return price.divide(
                 BigDecimal.valueOf(100),
                 ROUNDING_NUMBER,
                 RoundingMode.CEILING)

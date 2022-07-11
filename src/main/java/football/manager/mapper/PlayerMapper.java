@@ -2,6 +2,7 @@ package football.manager.mapper;
 
 import football.manager.dto.PlayerRequestDto;
 import football.manager.dto.PlayerResponseDto;
+import football.manager.dto.TeamResponseDto;
 import football.manager.model.Player;
 import football.manager.model.Team;
 import football.manager.service.TeamService;
@@ -10,9 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlayerMapper {
     private final TeamService teamService;
+    private final TeamMapper teamMapper;
 
-    public PlayerMapper(TeamService teamService) {
+    public PlayerMapper(TeamService teamService,
+                        TeamMapper teamMapper) {
         this.teamService = teamService;
+        this.teamMapper = teamMapper;
     }
 
     public PlayerResponseDto toDto(Player player) {
@@ -22,7 +26,8 @@ public class PlayerMapper {
         responseDto.setLastName(player.getLastName());
         responseDto.setAge(player.getAge());
         responseDto.setExperience(player.getExperience());
-        responseDto.setTeam(player.getTeam());
+        TeamResponseDto teamResponseDto = teamMapper.toDto(player.getTeam());
+        responseDto.setTeamResponseDto(teamResponseDto);
         return responseDto;
     }
 

@@ -1,14 +1,12 @@
 package football.manager.dto;
 
-import football.manager.model.Team;
-
 public class PlayerResponseDto {
     private Long id;
     private String firstName;
     private String lastName;
     private int age;
     private int experience;
-    private Team team;
+    private TeamResponseDto teamResponseDto;
 
     public Long getId() {
         return id;
@@ -50,11 +48,11 @@ public class PlayerResponseDto {
         this.experience = experience;
     }
 
-    public Team getTeam() {
-        return team;
+    public TeamResponseDto getTeamResponseDto() {
+        return teamResponseDto;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeamResponseDto(TeamResponseDto teamResponseDto) {
+        this.teamResponseDto = teamResponseDto;
     }
 }
