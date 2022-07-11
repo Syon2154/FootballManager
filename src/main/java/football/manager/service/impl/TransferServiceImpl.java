@@ -36,6 +36,8 @@ public class TransferServiceImpl implements TransferService {
         Team buyerTeam = transfer.getBuyerTeam();
         Team sellerTeam = transfer.getSellerTeam();
         BigDecimal price = calculatePrice(transfer);
+        price = price.add(calculateCommission(price,
+                buyerTeam.getCommission()));
         if (price.compareTo(buyerTeam.getBudget()) > 0) {
             throw new TransferProcessingException("Not enough money");
         }
@@ -62,16 +64,19 @@ public class TransferServiceImpl implements TransferService {
     private BigDecimal calculatePrice(Transfer transfer) {
         Player player = transfer.getPlayer();
         Team buyerTeam = transfer.getBuyerTeam();
-        BigDecimal price = BigDecimal.valueOf(player.getExperience())
+        return BigDecimal.valueOf(player.getExperience())
                 .multiply(PRICE_MULTIPLIER)
                 .divide(BigDecimal.valueOf(
                                 player.getAge()),
                         ROUNDING_NUMBER,
                         RoundingMode.CEILING);
-        return price.add(price.divide(
-                        BigDecimal.valueOf(100),
-                        ROUNDING_NUMBER,
-                        RoundingMode.CEILING)
-                .multiply(BigDecimal.valueOf(buyerTeam.getCommission())));
+    }
+
+    private BigDecimal calculateCommission(BigDecimal price, double percent) {
+         return price.divide(
+                BigDecimal.valueOf(100),
+                ROUNDING_NUMBER,
+                RoundingMode.CEILING)
+                .multiply(BigDecimal.valueOf(percent));
     }
 }
