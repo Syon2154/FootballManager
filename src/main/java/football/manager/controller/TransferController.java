@@ -8,11 +8,13 @@ import football.manager.service.TransferService;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,17 +30,20 @@ public class TransferController {
     }
 
     @PostMapping
-    public TransferResponseDto crateTransfer(@RequestBody @Valid TransferRequestDto requestDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public TransferResponseDto save(@RequestBody @Valid TransferRequestDto requestDto) {
         Transfer transfer = transferMapper.toModel(requestDto);
         return transferMapper.toDto(transferService.createTransfer(transfer));
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public TransferResponseDto get(@PathVariable Long id) {
         return transferMapper.toDto(transferService.get(id));
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<TransferResponseDto> getAll() {
         return transferService.getAll().stream()
                 .map(transferMapper::toDto)

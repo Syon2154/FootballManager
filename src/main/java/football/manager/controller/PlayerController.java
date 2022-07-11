@@ -8,6 +8,7 @@ import football.manager.service.PlayerService;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,6 +31,7 @@ public class PlayerController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public PlayerResponseDto save(@RequestBody @Valid PlayerRequestDto requestDto) {
         Player player = playerMapper.toModel(requestDto);
         return playerMapper.toDto(playerService.save(player));
@@ -40,6 +43,7 @@ public class PlayerController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<PlayerResponseDto> getAll() {
         return playerService.getAll().stream()
                 .map(playerMapper::toDto)
@@ -47,6 +51,7 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public PlayerResponseDto update(@PathVariable Long id,
                                     @RequestBody @Valid PlayerRequestDto requestDto) {
         Player player = playerMapper.toModel(requestDto);
@@ -55,6 +60,7 @@ public class PlayerController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         playerService.delete(id);
     }
