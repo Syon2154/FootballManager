@@ -12,6 +12,7 @@ public class TeamMapper {
         responseDto.setId(team.getId());
         responseDto.setName(team.getName());
         responseDto.setCountry(team.getCountry());
+        responseDto.setCommission(team.getCommission());
         responseDto.setBudget(team.getBudget());
         return responseDto;
     }
@@ -20,6 +21,7 @@ public class TeamMapper {
         Team team = new Team();
         team.setName(requestDto.getName());
         team.setCountry(requestDto.getCountry());
+        team.setCommission(requestDto.getCommission());
         team.setBudget(requestDto.getBudget());
         return team;
     }

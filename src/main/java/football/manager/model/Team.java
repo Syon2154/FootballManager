@@ -15,6 +15,7 @@ public class Team {
     private Long id;
     private String name;
     private String country;
+    private double commission;
     private BigDecimal budget;
 
     public Long getId() {
@@ -39,6 +40,14 @@ public class Team {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public double getCommission() {
+        return commission;
+    }
+
+    public void setCommission(double commission) {
+        this.commission = commission;
     }
 
     public BigDecimal getBudget() {
