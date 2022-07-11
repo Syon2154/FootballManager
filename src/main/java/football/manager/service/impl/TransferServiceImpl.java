@@ -41,8 +41,8 @@ public class TransferServiceImpl implements TransferService {
         if (price.compareTo(buyerTeam.getBudget()) > 0) {
             throw new TransferProcessingException("Not enough money");
         }
-        BigDecimal sum = buyerTeam.getBudget().subtract(price);
-        sellerTeam.setBudget(sellerTeam.getBudget().add(sum));
+        buyerTeam.setBudget(buyerTeam.getBudget().subtract(price));
+        sellerTeam.setBudget(sellerTeam.getBudget().add(price));
         player.setTeam(buyerTeam);
         teamService.update(buyerTeam);
         teamService.update(buyerTeam);
