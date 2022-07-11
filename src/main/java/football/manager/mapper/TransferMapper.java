@@ -23,9 +23,6 @@ public class TransferMapper {
     public TransferResponseDto toDto(Transfer transfer) {
         TransferResponseDto responseDto = new TransferResponseDto();
         responseDto.setId(transfer.getId());
-        responseDto.setPlayer(transfer.getPlayer());
-        responseDto.setSellerTeam(transfer.getSellerTeam());
-        responseDto.setBuyerTeam(transfer.getBuyerTeam());
         responseDto.setPrice(transfer.getPrice());
         return responseDto;
     }

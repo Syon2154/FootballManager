@@ -50,6 +50,7 @@ public class TeamController {
     public TeamResponseDto update(@PathVariable Long id,
                                   @RequestBody @Valid TeamRequestDto requestDto) {
         Team team = teamMapper.toModel(requestDto);
+        team.setId(id);
         return teamMapper.toDto(teamService.update(team));
     }
 

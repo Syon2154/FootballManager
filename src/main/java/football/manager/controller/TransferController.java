@@ -38,6 +38,7 @@ public class TransferController {
         return transferMapper.toDto(transferService.get(id));
     }
 
+    @GetMapping
     public List<TransferResponseDto> getAll() {
         return transferService.getAll().stream()
                 .map(transferMapper::toDto)
